@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+  <script src="../src/base.js"></script>
+  <script src="../src/common.js"></script>
+  <script src="../src/random_number_creator.js"></script>
+  <script src="../src/font_canvas.js"></script>
+  <script src="../src/pirticle_font_drawer.js"></script>
+<script>
+function init() {
+  new PirticleFontDrawer('top_canvas1', 'iron sand', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'}
+  });
+  new PirticleFontDrawer('top_canvas2', 'Web Font Candal', {
+    fontStyles: {'font-family':'Candal', 'font-size': '100px'},
+    fontUrl: 'https://fonts.googleapis.com/css?family=Candal',
+    textColor: '87ceeb',
+    firstBound: false
+  });
+  new PirticleFontDrawer('top_canvas3', 'iron sand', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'},
+    textureUrl: 'img/bg.jpg'
+  });
+}
+
+</script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+<h1>Sample</h1>
+
+<h2>Simple Code</h2>
+<code>
+<pre>
+  new PirticleFontDrawer('top_canvas1', 'iron sand', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'}
+  });
+</code>
+</pre>
+
+<canvas id="top_canvas1" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
+
+<h2>Use Web Font</h2>
+<code>
+<pre>
+  new PirticleFontDrawer('top_canvas2', 'Web Font Candal', {
+    fontStyles: {'font-family':'Candal', 'font-size': '100px'},
+    fontUrl: 'https://fonts.googleapis.com/css?family=Candal',
+    textColor: '87ceeb',
+    firstBound: false
+  });
+</code>
+</pre>
+
+<canvas id="top_canvas2" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
+
+<h2>Set Pirtcle Color From A Picture</h2>
+<code>
+<pre>
+  new PirticleFontDrawer('top_canvas3', 'iron sand', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'},
+    textureUrl: 'img/bg.jpg'
+  });
+</code>
+</pre>
+<img src="img/bg.jpg"/><br/>
+<canvas id="top_canvas3" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
+</body>
+</html>

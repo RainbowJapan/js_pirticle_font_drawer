@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link href="http://fonts.googleapis.com/css?family=Candal" rel="stylesheet" type="text/css">
   <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
   <script src="../src/base.js"></script>
   <script src="../src/common.js"></script>
@@ -27,6 +28,17 @@ function init() {
     fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'},
     textureUrl: 'img/bg.jpg'
   });
+  new PirticleFontDrawer('top_canvas4', '　吾輩は猫である。\n　どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで\n\
+始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時\n々我々を捕（つかま）えて煮て食うという話である。しかしその当時\
+は何という考もなかったから別段恐しいとも思わなかった。ただ\n彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見た\nの\
+がいわゆる人間というものの見始（みはじめ）であろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾\nされべきはずの顔がつるつるしてまるで薬缶だ。その後猫にもだいぶ逢\
+ったがこんな片輪には一度も出会わした事がない。のみならず\n顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙を吹く。どうも咽せぽくて実に弱った。これが人間の飲\nむ煙\
+草というものである事はようやくこの頃知った。 ', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '14px'},
+    homeForceRang: [190, 100],
+    fps: 60,
+    offsetX: 50
+  });
 }
 
 </script>
@@ -34,10 +46,9 @@ function init() {
 </head>
 <body onload="init();" style="margin:0px;">
 <h1>Sample</h1>
-
 <h2>Simple Code</h2>
-<code>
 <pre>
+<code>
   new PirticleFontDrawer('top_canvas1', 'iron sand', {
     fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'}
   });
@@ -47,11 +58,16 @@ function init() {
 <canvas id="top_canvas1" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
 
 <h2>Use Web Font</h2>
-<code>
 <pre>
+<code>
+&lt;link href="http://fonts.googleapis.com/css?family=Candal" rel="stylesheet" type="text/css"&gt;
+</code>
+</pre>
+<pre>
+<code>
   new PirticleFontDrawer('top_canvas2', 'Web Font Candal', {
     fontStyles: {'font-family':'Candal', 'font-size': '100px'},
-    fontUrl: 'https://fonts.googleapis.com/css?family=Candal',
+    fontUrl: 'http://fonts.googleapis.com/css?family=Candal',
     textColor: '87ceeb',
     firstBound: false
   });
@@ -61,8 +77,8 @@ function init() {
 <canvas id="top_canvas2" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
 
 <h2>Set Pirtcle Color From A Picture</h2>
-<code>
 <pre>
+<code>
   new PirticleFontDrawer('top_canvas3', 'iron sand', {
     fontStyles: {'font-family':'Times New Roman', 'font-size': '100px'},
     textureUrl: 'img/bg.jpg'
@@ -71,5 +87,24 @@ function init() {
 </pre>
 <img src="img/bg.jpg"/><br/>
 <canvas id="top_canvas3" width="1000" height="120" style="background-color:rgba(0, 0, 0, 0)"></canvas>
+
+<h2>Use Web Font</h2>
+<pre>
+<code>
+  new PirticleFontDrawer('top_canvas4', '　吾輩は猫である。\n　どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで\n\
+始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時\n々我々を捕（つかま）えて煮て食うという話である。しかしその当時\
+は何という考もなかったから別段恐しいとも思わなかった。ただ\n彼の掌に載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見た\nの\
+がいわゆる人間というものの見始（みはじめ）であろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾\nされべきはずの顔がつるつるしてまるで薬缶だ。その後猫にもだいぶ逢\
+ったがこんな片輪には一度も出会わした事がない。のみならず\n顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙を吹く。どうも咽せぽくて実に弱った。これが人間の飲\nむ煙\
+草というものである事はようやくこの頃知った。 ', {
+    fontStyles: {'font-family':'Times New Roman', 'font-size': '14px'},
+    homeForceRang: [190, 100],
+    fps: 60,
+    offsetX: 50
+  });
+</code>
+</pre>
+<canvas id="top_canvas4" width="1000" height="130" style="background-color:rgba(0, 0, 0, 0)"></canvas>
+
 </body>
 </html>

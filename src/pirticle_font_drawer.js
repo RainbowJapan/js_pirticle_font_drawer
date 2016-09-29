@@ -156,19 +156,21 @@ PirticleFontDrawer.prototype.createDotsFromCanvasFont = function (canvasFont, im
   var firstBound = this.firstBound;
 
   var p, prev;
-  var x, y, px, py;
+  var x, y, px, py, alpha, c, index;
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
       x = i * stepX;
       y = j * stepY;
       px = parseInt(x);
       py = parseInt(y);
-      var index = (px + py * w) * 4;
-      if (canvasFontData.data[index + 0] <= 0) continue;
+      index = (px + py * w) * 4;
+      c = canvasFontData.data[index + 0];
+      if (c <= 0) continue;
+      alpha = canvasFontData.data[index + 3];
       if (firstBound) {
-        p = new dotClass(randFunc( offsetX, w + offsetX), randFunc( offsetY, h + offsetY), getRgb(imageBytes, px, py));
+        p = new dotClass(randFunc( offsetX, w + offsetX), randFunc( offsetY, h + offsetY), getRgb(imageBytes, px, py, alpha));
       } else {
-        p = new dotClass(offsetX+x, offsetY+y, getRgb(imageBytes, px, py));
+        p = new dotClass(offsetX+x, offsetY+y, getRgb(imageBytes, px, py, alpha));
       }
       p.init();
       p.damp = randFunc(dampForceMin, dampForceMax) / 100;
@@ -182,15 +184,15 @@ PirticleFontDrawer.prototype.createDotsFromCanvasFont = function (canvasFont, im
       prev = p;
     }
   }
-  function getRgb(imageBytes, x, y) {
-    if (!imageBytes) return rgba;
+  function getRgb(imageBytes, x, y, alpha) {
+    if (!imageBytes) return {r: rgba.r, g: rgba.g, b: rgba.b, a: alpha};
     var index = (x + y * imageBytes.width) * 4;
     var color = {};
     var data = imageBytes.data;
     color.r = data[index + 0];
     color.g = data[index + 1];
     color.b = data[index + 2];
-    color.a = data[index + 3];
+    color.a = alpha;
     return color;
   }
 };

@@ -1,5 +1,6 @@
 var FontCanvas = FontCanvas || function (text, fontStyles, fontUrl, completeFunc) {
-  this.text = text;
+  this.texts = text.split("\n");
+  this.lineHeight = 0;
   this.fontStyles = fontStyles;
   this.fontText = this.getText(fontStyles);
   this.fontUrl = fontUrl;
@@ -41,7 +42,6 @@ FontCanvas.prototype.getTextSize = function(text, fontStyles) {
   div.style.fontWeight = fontStyles['font-weight'];
   div.style.fontSize = fontStyles['font-size'];
   div.style.fontFamily = fontStyles['font-family'];
-  div.style.padding = '6px';
   try {
     document.body.appendChild(div);
     var size = [div.clientWidth, div.clientHeight];
@@ -59,22 +59,38 @@ FontCanvas.prototype.init = function () {
 
 FontCanvas.prototype.load = function () {
   if (this.fontUrl) {
-    this.setWebFont(this.text, this.fontText, this.fontUrl);
+    this.setWebFont(this.texts, this.fontText, this.fontUrl);
   } else {
     this.setFont(this.fontText);
     this.setTextSize();
     this.setFont(this.fontText);
-    this.fillText(this.text, 0, 0);
+    this.fillText(this.texts, 0, 5);
     this.completeFunc();
   }
 };
 
 FontCanvas.prototype.setTextSize = function () {
-  var size = this.getTextSize(this.text, this.fontStyles);
+  var texts = this.texts;
+  var maxHeihgt = 0;
+  var size, s;
+  
+  for (var i in texts) {
+    s = this.getTextSize(texts[i], this.fontStyles);
+    if (size) {
+      if (s[0] > size[0]) {
+        size[0] = s[0];
+      }
+      if (s[1] > size[1]) {
+        size[1] = s[1];
+      }
+    } else {
+      size = s;
+    }
+  }
   if (size) {
     this.width = size[0];
-    this.height = size[1];
-
+    this.height = size[1] * texts.length;
+    this.lineHeight = size[1];
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.context = this.canvas.getContext("2d");
@@ -83,20 +99,22 @@ FontCanvas.prototype.setTextSize = function () {
   }
 };
 
-FontCanvas.prototype.setWebFont = function (text, fontText, fontUrl) {
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = fontUrl;
-  document.getElementsByTagName('head')[0].appendChild(link);
+FontCanvas.prototype.setWebFont = function (texts, fontText, fontUrl) {
+  var ctx = this.context;
+
   var image = new Image;
-  image.src = link.href;
+  image.src = fontUrl;
+  
+  this.setFont(fontText);
+  ctx.globalAlpha = 0;
+  ctx.fillText('-', 0, 0);
+  
   var base = this;
   image.onerror = function() {
-    base.setFont(fontText);
+    ctx.globalAlpha = 1;
     base.setTextSize();
     base.setFont(fontText);
-    base.fillText(text, 0, 0);
+    base.fillText(texts, 0, 3);
     base.completeFunc();
     image = null;
   };
@@ -108,6 +126,9 @@ FontCanvas.prototype.setFont = function (fontText) {
   this.context.fillStyle = 'red';
 };
 
-FontCanvas.prototype.fillText = function (text, x, y) {
-  this.context.fillText(text, x, y);
+FontCanvas.prototype.fillText = function (texts, x, y) {
+  var lineHeight = this.lineHeight;
+  for (var i in texts) {
+    this.context.fillText(texts[i], x, y + i*lineHeight);
+  }
 };
